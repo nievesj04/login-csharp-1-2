@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Data.SqlClient;
+using System.Data.SqlClient; // Libreria para el manejo de la base de datos
 
 namespace Login
 {
-    public partial class Form1 : Form1{
+    public partial class Form1 : Form
+    {
         public Form1()
         {
+            // Inicializa los componentes graficos
             InitializeComponent();
         }
 
@@ -30,9 +32,18 @@ namespace Login
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
+                // Verifica y cuenta que existan filas en la base de datos
                 if(dt.Rows.Count == 1)
                 {
-
+                    this.Hide();
+                    if (dt.Rows[0][1].ToString() == "Admin");  //Verifica si el usuasio que se esta autenticando es "Usuario o Admin"
+                    {     
+                        new Admin(dt.Rows[0][0].ToString()).Show(); //Muestra la ventana admin en caso de ser "Admin"
+                    } 
+                    else if (dt.Rows[0][1].ToString () == "Usuario") //Verifica si el usuasio que se esta autenticando es "Usuario o Admin"
+                    {
+                        new Usuario (dt.Rows[0][0].ToString()).Show(); //Muestra la ventana usuario en caso de ser "Usuario"
+                    }          
                 }
                 else
                 {
@@ -45,7 +56,8 @@ namespace Login
             }
             finally
             {
-
+                // Cierra la conección a la Base de Datos
+                con.Close();
             }
         }
     }

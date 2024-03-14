@@ -11,5 +11,6 @@ CREATE TABLE [dbo].[Usuarios]
 
 SELECT * FROM Usuarios
 
+-- Insertando Valores
 INSERT INTO Usuarios VALUES ('Jesus', 'Jesus004', '12345', 'Admin'),
                             ('Ricardo', 'Ricardo007', '54321', 'User');
